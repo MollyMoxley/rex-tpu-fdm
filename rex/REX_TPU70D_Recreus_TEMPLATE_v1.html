@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>REX TPU 70D Recreus — Template DOE v1</title>
+<style>
+:root{
+  --ink:#0D1117;--ink-soft:#3A4453;--ink-ghost:#6B7684;
+  --rule:#E2E6EB;--rule-mid:#C8CDD4;
+  --bg:#F7F9FB;--bg-card:#FFFFFF;
+  --accent:#0057FF;--accent-lt:#E8EFFF;
+  --green:#006644;--green-lt:#E3F5EC;
+  --red:#B91C1C;--red-lt:#FEF2F2;
+  --warn:#D97706;--warn-lt:#FEF3C7;
+  --purple:#5B21B6;--purple-lt:#EDE9FE;
+  --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13px;line-height:1.5;}
+.page{max-width:980px;margin:0 auto;padding:48px 40px 80px;}
+
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:36px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;}
+.masthead-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-ghost);margin-bottom:6px;}
+.masthead-title{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
+.masthead-subtitle{font-size:13px;color:var(--ink-soft);margin-top:4px;font-style:italic;}
+.masthead-meta{text-align:right;}
+.meta-pill{display:inline-block;background:var(--warn);color:#fff;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.meta-date{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);display:block;}
+
+.section{margin-bottom:40px;}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.section-number{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--accent);letter-spacing:.08em;min-width:28px;}
+.section-title{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+.section-rule{flex:1;height:1px;background:var(--rule);}
+
+/* Context grid */
+.context-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+.ctx-cell{background:var(--bg-card);padding:12px 14px;}
+.ctx-label{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:.06em;margin-bottom:3px;}
+.ctx-value{font-size:13px;font-weight:500;color:var(--ink);}
+.ctx-value.warn{color:var(--warn);font-weight:700;}
+.ctx-value.todo{color:var(--ink-ghost);font-style:italic;}
+
+/* Alert banner */
+.alert{padding:14px 18px;border-radius:4px;border-left:4px solid;margin-bottom:24px;font-size:12px;line-height:1.6;}
+.alert-warn{background:var(--warn-lt);border-color:var(--warn);color:#92400e;}
+.alert-info{background:var(--accent-lt);border-color:var(--accent);color:#1e3a8a;}
+.alert strong{font-weight:600;}
+
+/* Param table */
+.param-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+.param-table thead tr{background:var(--ink);}
+.param-table thead th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:10px 14px;text-align:left;}
+.param-table tbody tr{border-top:1px solid var(--rule);}
+.param-table tbody tr:nth-child(even){background:var(--bg);}
+.param-table tbody tr:nth-child(odd){background:var(--bg-card);}
+.param-table td{padding:10px 14px;vertical-align:top;}
+.param-label{font-size:12px;font-weight:500;color:var(--ink);}
+.param-value{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);}
+.param-value.todo{color:var(--ink-ghost);font-style:italic;}
+.param-unit{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);}
+.param-note{font-size:11px;color:var(--ink-soft);line-height:1.4;}
+.badge{display:inline-flex;align-items:center;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.badge-todo{background:#F3F4F6;color:var(--ink-ghost);}
+.badge-warn{background:var(--warn-lt);color:var(--warn);}
+.badge-ok{background:var(--green-lt);color:var(--green);}
+.badge-key{background:var(--accent);color:#fff;}
+
+/* AMDEC */
+.amdec-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+.amdec-table thead tr{background:var(--purple);}
+.amdec-table thead th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8);padding:10px 14px;text-align:left;}
+.amdec-table tbody tr{border-top:1px solid var(--rule);}
+.amdec-table tbody tr:nth-child(even){background:var(--bg);}
+.amdec-table tbody tr:nth-child(odd){background:var(--bg-card);}
+.amdec-table td{padding:9px 14px;vertical-align:top;font-size:11px;line-height:1.45;}
+.ipr{font-family:var(--mono);font-size:13px;font-weight:700;}
+.ipr.high{color:var(--red);}
+.ipr.med{color:var(--warn);}
+.ipr.low{color:var(--green);}
+
+/* DOE Taguchi */
+.doe-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:16px;}
+.doe-card{border:1px solid var(--rule);border-radius:4px;background:var(--bg-card);overflow:hidden;}
+.doe-card-header{padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--rule);font-size:11px;font-weight:600;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase;}
+.doe-card-body{padding:12px 14px;}
+.doe-var{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--rule);font-size:12px;}
+.doe-var:last-child{border-bottom:none;}
+.doe-var-name{font-weight:500;color:var(--ink);}
+.doe-var-levels{font-family:var(--mono);font-size:11px;color:var(--accent);}
+
+.l8-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:4px;overflow:hidden;font-size:11px;}
+.l8-table thead tr{background:var(--ink);}
+.l8-table thead th{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.6);padding:8px 10px;text-align:center;letter-spacing:.06em;}
+.l8-table tbody tr{border-top:1px solid var(--rule);}
+.l8-table tbody tr:nth-child(even){background:var(--bg);}
+.l8-table tbody td{padding:8px 10px;text-align:center;font-family:var(--mono);}
+.l8-table tbody td:first-child{text-align:left;font-weight:600;font-family:var(--sans);}
+.lv1{color:var(--accent);}
+.lv2{color:var(--ink-soft);}
+
+/* Fenêtre process */
+.window-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.window-card{border:1px solid var(--rule);border-radius:4px;background:var(--bg-card);overflow:hidden;}
+.window-header{padding:10px 14px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;}
+.window-param{font-size:12px;font-weight:600;color:var(--ink);}
+.window-status{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:.08em;padding:2px 6px;border-radius:2px;}
+.ws-todo{background:#F3F4F6;color:var(--ink-ghost);}
+.ws-watch{background:var(--warn-lt);color:var(--warn);}
+.ws-critical{background:var(--red-lt);color:var(--red);}
+.window-body{padding:12px 14px;}
+.window-range{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--accent);margin-bottom:4px;}
+.window-unit{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);}
+.window-note{font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.4;}
+.window-baseline{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);margin-top:4px;}
+
+/* Cas d'usage */
+.usecase-grid{display:flex;flex-direction:column;gap:8px;}
+.usecase-row{display:grid;grid-template-columns:140px 1fr 120px 140px;gap:12px;align-items:start;padding:12px 16px;border-radius:4px;border-left:3px solid transparent;background:var(--bg-card);border:1px solid var(--rule);}
+.usecase-row.primary{border-left-color:var(--accent);}
+.usecase-row.secondary{border-left-color:var(--ink-ghost);}
+.usecase-tag{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--accent);}
+.usecase-row.secondary .usecase-tag{color:var(--ink-ghost);}
+.usecase-desc{font-size:12px;font-weight:500;color:var(--ink);line-height:1.4;}
+.usecase-sub{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+.usecase-adv{font-size:11px;color:var(--green);font-weight:500;}
+.usecase-limit{font-size:11px;color:var(--warn);}
+
+/* Footer status */
+.status-footer{margin-top:40px;padding:18px 24px;background:var(--ink);border-radius:4px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;}
+.status-item{padding:0 16px;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+.status-item:last-child{border-right:none;}
+.status-item-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px;}
+.status-item-value{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;}
+.status-item-value.warn{color:#FCD34D;}
+.status-item-value.todo{color:rgba(255,255,255,.3);}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div>
+    <div class="masthead-label">TEMPLATE DOE — TPU 70D Recreus · Multi-machine · 0.4mm</div>
+    <div class="masthead-title">Qualification TPU 70D<br>FilaFlex Recreus</div>
+    <div class="masthead-subtitle">DOE Taguchi L8 · Mini-AMDEC · Fenêtre Process · Cas d'usage</div>
+  </div>
+  <div class="masthead-meta">
+    <div class="meta-pill">TEMPLATE v1.0</div>
+    <span class="meta-date">Créé : 20 / 03 / 2026</span>
+    <span class="meta-date" style="margin-top:4px;display:block;">REX : À REMPLIR</span>
+  </div>
+</div>
+
+<!-- ALERT SHORE D -->
+<div class="alert alert-warn">
+  <strong>⚠ Attention Shore D ≠ Shore A.</strong> Le TPU 70D FilaFlex Recreus est noté en échelle D, pas A. Shore 70D ≈ Shore 97–98A en rigidité équivalente approximative — mais la rhéologie est différente. Ne pas extrapoler directement depuis les profils 85A/98A. Ce template est un point de départ à valider par DOE complet.
+</div>
+
+<!-- 01 CONTEXTE -->
+<div class="section">
+  <div class="section-header"><span class="section-number">01</span><span class="section-title">Contexte & Machines cibles</span><div class="section-rule"></div></div>
+  <div class="context-grid">
+    <div class="ctx-cell"><div class="ctx-label">Filament</div><div class="ctx-value">FilaFlex Recreus 70D</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Shore</div><div class="ctx-value warn">70D (≠ Shore A)</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Fabricant</div><div class="ctx-value">Recreus (Espagne)</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Diamètre</div><div class="ctx-value">1.75 mm</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Densité</div><div class="ctx-value todo">À relever FDS</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Temp. FDS fabricant</div><div class="ctx-value todo">À relever FDS</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Machine 1</div><div class="ctx-value">EX0 — Qidi X-Max 3</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Volume build</div><div class="ctx-value">310 × 310 × 315 mm</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Machine 2</div><div class="ctx-value">EX3 — Bambu Lab A1</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Buse</div><div class="ctx-value">0.4 mm acier</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Séchage requis</div><div class="ctx-value warn">45°C / 8–10h</div></div>
+    <div class="ctx-cell"><div class="ctx-label">Statut</div><div class="ctx-value warn">NON QUALIFIÉ</div></div>
+  </div>
+</div>
+
+<!-- 02 CAS D'USAGE -->
+<div class="section">
+  <div class="section-header"><span class="section-number">02</span><span class="section-title">Cas d'usage cibles</span><div class="section-rule"></div></div>
+  <div class="alert alert-info">
+    Le 70D est plus rigide que le 85A/98A — moins de flexibilité, meilleure tenue dimensionnelle. Adapter les cas d'usage en conséquence.
+  </div>
+  <div class="usecase-grid">
+    <div class="usecase-row primary">
+      <span class="usecase-tag">PRIMAIRE</span>
+      <div><div class="usecase-desc">Pièces semi-rigides à tenue dimensionnelle requise</div><div class="usecase-sub">Joints, bagues, inserts, protections mécaniques</div></div>
+      <span class="usecase-adv">Rigidité + durabilité</span>
+      <span class="usecase-limit">Moins flexible que 85A</span>
+    </div>
+    <div class="usecase-row primary">
+      <span class="usecase-tag">PRIMAIRE</span>
+      <div><div class="usecase-desc">Semelles, patins, tampons anti-vibration</div><div class="usecase-sub">Amortissement mécanique — tenue à la compression</div></div>
+      <span class="usecase-adv">Bon compromis rigidité/amortissement</span>
+      <span class="usecase-limit">Moins souple que 85A</span>
+    </div>
+    <div class="usecase-row secondary">
+      <span class="usecase-tag">SECONDAIRE</span>
+      <div><div class="usecase-desc">Coques de protection rigide-flexible</div><div class="usecase-sub">Boîtiers, capots, protections bords</div></div>
+      <span class="usecase-adv">Tenue choc + légèreté</span>
+      <span class="usecase-limit">Stringing à surveiller</span>
+    </div>
+    <div class="usecase-row secondary">
+      <span class="usecase-tag">SECONDAIRE</span>
+      <div><div class="usecase-desc">Pièces de remplacement atelier</div><div class="usecase-sub">Rouleaux, galets, pièces d'usure machines</div></div>
+      <span class="usecase-adv">Résistance abrasion > 85A</span>
+      <span class="usecase-limit">À valider selon charge</span>
+    </div>
+    <div class="usecase-row secondary">
+      <span class="usecase-tag">À ÉVITER</span>
+      <div><div class="usecase-desc">Pièces nécessitant flexibilité extrême</div><div class="usecase-sub">Tubes, manchons très souples, pièces en traction répétée</div></div>
+      <span class="usecase-limit" style="color:var(--red);">70D trop rigide pour cet usage</span>
+      <span class="usecase-limit">Privilégier 85A ou 98A</span>
+    </div>
+  </div>
+</div>
+
+<!-- 03 FENETRE PROCESS -->
+<div class="section">
+  <div class="section-header"><span class="section-number">03</span><span class="section-title">Fenêtre process estimée — Point de départ DOE</span><div class="section-rule"></div></div>
+  <div class="alert alert-warn">
+    <strong>Ces valeurs sont des estimations de départ.</strong> Elles combinent les données FDS Recreus, l'extrapolation depuis REX 85A, et la logique Shore D. À remplacer par les valeurs validées après DOE.
+  </div>
+  <div class="window-grid">
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Temp. buse</span><span class="window-status ws-critical">CRITIQUE</span></div>
+      <div class="window-body">
+        <div class="window-range">215 – 225</div><div class="window-unit">°C</div>
+        <div class="window-note">Point de départ : 220°C. Shore D plus rigide → T plus basse probable vs 85A (229°C). Vérifier FDS Recreus avant premier print.</div>
+        <div class="window-baseline">Baseline 85A : 229°C | 98A estimé : 220°C</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Temp. plateau</span><span class="window-status ws-todo">À VALIDER</span></div>
+      <div class="window-body">
+        <div class="window-range">40 – 55</div><div class="window-unit">°C</div>
+        <div class="window-note">Départ 45°C. Adhérence plateau à tester — matière plus rigide = tendance warping réduite mais adhésion différente.</div>
+        <div class="window-baseline">Baseline 85A : 55°C</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Débit volumique max</span><span class="window-status ws-watch">SURVEILLER</span></div>
+      <div class="window-body">
+        <div class="window-range">1.8 – 3.0</div><div class="window-unit">mm³/s</div>
+        <div class="window-note">Plus rigide = meilleur grippage extrudeur, débit potentiellement plus élevé que 85A vieilli. Commencer conservateur à 2.0.</div>
+        <div class="window-baseline">Baseline 85A : 1.42 | 98A estimé : 2.5</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Rétraction</span><span class="window-status ws-watch">SURVEILLER</span></div>
+      <div class="window-body">
+        <div class="window-range">0.40 – 0.70</div><div class="window-unit">mm</div>
+        <div class="window-note">Matière plus rigide tolère mieux la rétraction. Risque de compression hotend réduit vs 85A. Surveiller stringing résiduel.</div>
+        <div class="window-baseline">Baseline 85A : 0.32mm | 98A estimé : 0.40mm</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Ventilation</span><span class="window-status ws-todo">À VALIDER</span></div>
+      <div class="window-body">
+        <div class="window-range">20 – 40</div><div class="window-unit">%</div>
+        <div class="window-note">Shore D solidifie plus vite — ventilation plus élevée tolérée. Adapter selon machine : Qidi chambre fermée → bas de fourchette.</div>
+        <div class="window-baseline">Baseline 85A : 10–18% | Qidi : réduire de ~5%</div>
+      </div>
+    </div>
+    <div class="window-card">
+      <div class="window-header"><span class="window-param">Avoid crossing</span><span class="window-status ws-todo">CONSERVER</span></div>
+      <div class="window-body">
+        <div class="window-range">ON / 8mm</div><div class="window-unit">—</div>
+        <div class="window-note">Hérité REX 85A. Levier trajectoire dominant — conserver par défaut quelle que soit la machine. Réduire à 5mm si temps print trop élevé.</div>
+        <div class="window-baseline">Baseline 85A : ON / 8mm — validé −60% stringing</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 MINI AMDEC -->
+<div class="section">
+  <div class="section-header"><span class="section-number">04</span><span class="section-title">Mini-AMDEC — Modes de défaillance anticipés</span><div class="section-rule"></div></div>
+  <table class="amdec-table">
+    <thead>
+      <tr>
+        <th>Mode de défaillance</th>
+        <th>Cause probable</th>
+        <th>Effet sur pièce</th>
+        <th style="text-align:center">G</th>
+        <th style="text-align:center">O</th>
+        <th style="text-align:center">D</th>
+        <th style="text-align:center">IPR</th>
+        <th>Action préventive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sous-extrusion</strong></td>
+        <td>T buse trop basse, débit trop élevé, bobine humide</td>
+        <td>Parois incomplètes, fragilité, manque matière</td>
+        <td style="text-align:center">4</td><td style="text-align:center">3</td><td style="text-align:center">2</td>
+        <td style="text-align:center"><span class="ipr med">24</span></td>
+        <td>Séchage systématique. Démarrer à 220°C, ajuster +3°C si sous-extrusion. Débit conservateur 2.0 mm³/s.</td>
+      </tr>
+      <tr>
+        <td><strong>Stringing / filaments</strong></td>
+        <td>T buse trop élevée, rétraction insuffisante, avoid_crossing désactivé</td>
+        <td>Fils entre volumes, post-traitement requis</td>
+        <td style="text-align:center">3</td><td style="text-align:center">4</td><td style="text-align:center">2</td>
+        <td style="text-align:center"><span class="ipr med">24</span></td>
+        <td>Avoid crossing ON / 8mm obligatoire. Rétraction 0.50–0.60mm. T buse ≤ 222°C première impression.</td>
+      </tr>
+      <tr>
+        <td><strong>Délaminage couches</strong></td>
+        <td>T buse trop basse, vitesse trop élevée, flow insuffisant</td>
+        <td>Résistance mécanique insuffisante, rupture inter-couches</td>
+        <td style="text-align:center">5</td><td style="text-align:center">2</td><td style="text-align:center">3</td>
+        <td style="text-align:center"><span class="ipr high">30</span></td>
+        <td>Vitesse mur ext ≤ 30mm/s. Flow 1.00–1.02. T buse > 215°C minimum absolu.</td>
+      </tr>
+      <tr>
+        <td><strong>Warping / décollement plateau</strong></td>
+        <td>Plateau trop froid, adhésion insuffisante, grande pièce</td>
+        <td>Pièce déformée ou détachée en cours d'impression</td>
+        <td style="text-align:center">4</td><td style="text-align:center">2</td><td style="text-align:center">2</td>
+        <td style="text-align:center"><span class="ipr low">16</span></td>
+        <td>Plateau 50°C première couche. Colle si nécessaire. Vitesse première couche réduite 50%.</td>
+      </tr>
+      <tr>
+        <td><strong>Bouchage hotend</strong></td>
+        <td>T trop basse, matière froide dans hotend, rétraction excessive</td>
+        <td>Arrêt impression, nettoyage requis</td>
+        <td style="text-align:center">5</td><td style="text-align:center">2</td><td style="text-align:center">3</td>
+        <td style="text-align:center"><span class="ipr high">30</span></td>
+        <td>T minimum 215°C absolu. Rétraction max 0.70mm — au-delà risque bouchage sur 70D. Cold pull si bouchage.</td>
+      </tr>
+      <tr>
+        <td><strong>Blobs / oozing zones arrêt</strong></td>
+        <td>Pression résiduelle hotend, wipe insuffisant</td>
+        <td>Défauts de surface, points brillants, aspérités</td>
+        <td style="text-align:center">2</td><td style="text-align:center">3</td><td style="text-align:center">2</td>
+        <td style="text-align:center"><span class="ipr low">12</span></td>
+        <td>Wipe 0.60–0.80mm. Levier moins critique que 85A vieilli — shore D meilleure viscosité.</td>
+      </tr>
+      <tr>
+        <td><strong>Instabilité dimensionnelle</strong></td>
+        <td>Flow incorrect, T instable, refroidissement insuffisant</td>
+        <td>Côtes hors tolérance, assemblage impossible</td>
+        <td style="text-align:center">4</td><td style="text-align:center">2</td><td style="text-align:center">2</td>
+        <td style="text-align:center"><span class="ipr low">16</span></td>
+        <td>Flow 1.00 point de départ. Calibrer e-steps si dérive. Ventilation suffisante (20%+) pour solidification.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:10px;font-size:11px;color:var(--ink-ghost);font-family:var(--mono);">G = Gravité (1–5) · O = Occurrence (1–5) · D = Détectabilité inverse (1–5) · IPR = G × O × D · Seuil alerte : IPR ≥ 20</div>
+</div>
+
+<!-- 05 DOE TAGUCHI L8 -->
+<div class="section">
+  <div class="section-header"><span class="section-number">05</span><span class="section-title">DOE Taguchi L8 — Plan d'expériences</span><div class="section-rule"></div></div>
+
+  <div class="doe-grid">
+    <div class="doe-card">
+      <div class="doe-card-header">Variables de contrôle (7 facteurs × 2 niveaux)</div>
+      <div class="doe-card-body">
+        <div class="doe-var"><span class="doe-var-name">A — Température buse</span><span class="doe-var-levels">N1: 215°C · N2: 222°C</span></div>
+        <div class="doe-var"><span class="doe-var-name">B — Débit volumique max</span><span class="doe-var-levels">N1: 2.0 mm³/s · N2: 2.8 mm³/s</span></div>
+        <div class="doe-var"><span class="doe-var-name">C — Rétraction</span><span class="doe-var-levels">N1: 0.40mm · N2: 0.60mm</span></div>
+        <div class="doe-var"><span class="doe-var-name">D — Ventilation</span><span class="doe-var-levels">N1: 20% · N2: 35%</span></div>
+        <div class="doe-var"><span class="doe-var-name">E — Wipe distance</span><span class="doe-var-levels">N1: 0.50mm · N2: 0.75mm</span></div>
+        <div class="doe-var"><span class="doe-var-name">F — Vitesse mur ext</span><span class="doe-var-levels">N1: 23mm/s · N2: 35mm/s</span></div>
+        <div class="doe-var"><span class="doe-var-name">G — Flow ratio</span><span class="doe-var-levels">N1: 1.00 · N2: 1.03</span></div>
+      </div>
+    </div>
+    <div class="doe-card">
+      <div class="doe-card-header">Critères de réponse (mesures par essai)</div>
+      <div class="doe-card-body">
+        <div class="doe-var"><span class="doe-var-name">R1 — Stringing</span><span class="doe-var-levels">Score 0–5 visuel</span></div>
+        <div class="doe-var"><span class="doe-var-name">R2 — Qualité surface</span><span class="doe-var-levels">Score 0–5 visuel</span></div>
+        <div class="doe-var"><span class="doe-var-name">R3 — Adhérence couches</span><span class="doe-var-levels">Test traction manuelle</span></div>
+        <div class="doe-var"><span class="doe-var-name">R4 — Dimensionnel</span><span class="doe-var-levels">Mesure calibre ±0.1mm</span></div>
+        <div class="doe-var"><span class="doe-var-name">R5 — Blobs / défauts</span><span class="doe-var-levels">Comptage défauts</span></div>
+        <div class="doe-var"><span class="doe-var-name">Score global</span><span class="doe-var-levels">R1×2 + R2 + R3×2 + R4 + R5</span></div>
+        <div class="doe-var"><span class="doe-var-name">Pièce test</span><span class="doe-var-levels">Cube 20mm + pont 40mm</span></div>
+      </div>
+    </div>
+  </div>
+
+  <table class="l8-table">
+    <thead>
+      <tr>
+        <th style="text-align:left">Essai</th>
+        <th>A — T°</th><th>B — Débit</th><th>C — Rétract</th>
+        <th>D — Fan</th><th>E — Wipe</th><th>F — Vit.</th><th>G — Flow</th>
+        <th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Essai 1</td><td class="lv1">215</td><td class="lv1">2.0</td><td class="lv1">0.40</td><td class="lv1">20%</td><td class="lv1">0.50</td><td class="lv1">23</td><td class="lv1">1.00</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 2</td><td class="lv1">215</td><td class="lv1">2.0</td><td class="lv1">0.40</td><td class="lv2">35%</td><td class="lv2">0.75</td><td class="lv2">35</td><td class="lv2">1.03</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 3</td><td class="lv1">215</td><td class="lv2">2.8</td><td class="lv2">0.60</td><td class="lv1">20%</td><td class="lv1">0.50</td><td class="lv2">35</td><td class="lv2">1.03</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 4</td><td class="lv1">215</td><td class="lv2">2.8</td><td class="lv2">0.60</td><td class="lv2">35%</td><td class="lv2">0.75</td><td class="lv1">23</td><td class="lv1">1.00</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 5</td><td class="lv2">222</td><td class="lv1">2.0</td><td class="lv2">0.60</td><td class="lv1">20%</td><td class="lv2">0.75</td><td class="lv1">23</td><td class="lv2">1.03</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 6</td><td class="lv2">222</td><td class="lv1">2.0</td><td class="lv2">0.60</td><td class="lv2">35%</td><td class="lv1">0.50</td><td class="lv2">35</td><td class="lv1">1.00</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 7</td><td class="lv2">222</td><td class="lv2">2.8</td><td class="lv1">0.40</td><td class="lv1">20%</td><td class="lv2">0.75</td><td class="lv2">35</td><td class="lv1">1.00</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Essai 8</td><td class="lv2">222</td><td class="lv2">2.8</td><td class="lv1">0.40</td><td class="lv2">35%</td><td class="lv1">0.50</td><td class="lv1">23</td><td class="lv2">1.03</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:8px;font-size:11px;color:var(--ink-ghost);">N1 = niveau bas (bleu) · N2 = niveau haut (gris) · Matrice orthogonale L8 — 8 essais couvrent 7 facteurs indépendants</div>
+</div>
+
+<!-- 06 PARAMETRES DE DEPART -->
+<div class="section">
+  <div class="section-header"><span class="section-number">06</span><span class="section-title">Paramètres de départ — À compléter après FDS Recreus</span><div class="section-rule"></div></div>
+  <table class="param-table">
+    <thead><tr><th>Paramètre</th><th>Valeur départ</th><th>Unité</th><th>Statut</th><th>Source / Note</th></tr></thead>
+    <tbody>
+      <tr><td><span class="param-label">Temp. buse</span></td><td><span class="param-value">220</span></td><td><span class="param-unit">°C</span></td><td><span class="badge badge-warn">ESTIMER</span></td><td><span class="param-note">À confirmer FDS Recreus — variable DOE A : 215 vs 222°C</span></td></tr>
+      <tr><td><span class="param-label">Temp. plateau</span></td><td><span class="param-value">45–50</span></td><td><span class="param-unit">°C</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">50°C première couche, 45°C suite</span></td></tr>
+      <tr><td><span class="param-label">Flow ratio</span></td><td><span class="param-value">1.00</span></td><td><span class="param-unit">—</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Variable DOE G</span></td></tr>
+      <tr><td><span class="param-label">Débit volumique max</span></td><td><span class="param-value">2.0</span></td><td><span class="param-unit">mm³/s</span></td><td><span class="badge badge-warn">CONSERVATEUR</span></td><td><span class="param-note">Démarrer bas, monter si pas sous-extrusion — variable DOE B</span></td></tr>
+      <tr><td><span class="param-label">Rétraction</span></td><td><span class="param-value">0.50</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Variable DOE C : 0.40 vs 0.60. Max absolu : 0.70mm</span></td></tr>
+      <tr><td><span class="param-label">Vitesse rétraction</span></td><td><span class="param-value">15</span></td><td><span class="param-unit">mm/s</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Plus rapide que 85A possible — shore D meilleure tenue</span></td></tr>
+      <tr><td><span class="param-label">Wipe distance</span></td><td><span class="param-value">0.60</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Variable DOE E</span></td></tr>
+      <tr><td><span class="param-label">Ventilation</span></td><td><span class="param-value">20–25</span></td><td><span class="param-unit">%</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Variable DOE D. Qidi chambre fermée : bas de fourchette</span></td></tr>
+      <tr><td><span class="param-label">Vitesse mur ext</span></td><td><span class="param-value">25–30</span></td><td><span class="param-unit">mm/s</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Variable DOE F</span></td></tr>
+      <tr><td><span class="param-label">Accélération</span></td><td><span class="param-value">700</span></td><td><span class="param-unit">mm/s²</span></td><td><span class="badge badge-todo">À VALIDER</span></td><td><span class="param-note">Intermédiaire 85A(650) / 98A(800)</span></td></tr>
+      <tr><td><span class="param-label">Avoid crossing</span></td><td><span class="param-value">ON / 8mm</span></td><td><span class="param-unit">—</span></td><td><span class="badge badge-ok">CONSERVER</span></td><td><span class="param-note">Hérité REX 85A validé — levier trajectoire dominant tous grades TPU</span></td></tr>
+      <tr><td><span class="param-label">Hauteur couche</span></td><td><span class="param-value">0.20</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-ok">STANDARD</span></td><td><span class="param-note">Hérité profils existants — pas variable DOE prioritaire</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- FOOTER -->
+<div class="status-footer">
+  <div class="status-item"><div class="status-item-label">Template</div><div class="status-item-value warn">v1.0 — À REMPLIR</div></div>
+  <div class="status-item"><div class="status-item-label">DOE</div><div class="status-item-value todo">NON DÉMARRÉ</div></div>
+  <div class="status-item"><div class="status-item-label">Profil slicer</div><div class="status-item-value todo">NON CRÉÉ</div></div>
+  <div class="status-item"><div class="status-item-label">REX</div><div class="status-item-value todo">À PRODUIRE</div></div>
+</div>
+
+</div>
+</body>
+</html>
