@@ -1,0 +1,61 @@
+{
+  "type": "filament",
+  "filament_id": "TPU85A-NinjaFlex-BambuA1-0.4mm",
+  "filament_vendor": "NinjaFlex / Recreus",
+  "filament_type": "TPU",
+  "filament_colour": "#888888",
+  "filament_diameter": 1.75,
+  "filament_density": 1.21,
+  "filament_cost": 0,
+
+  "notes": "REX v2.0 validé 2026-03-20. Lot vieilli ~3 ans. Grade proto/R&D uniquement. Séchage obligatoire 45°C / 10h avant impression. NE PAS utiliser en production — grade recommandé production : TPU 98A.",
+
+  "nozzle_temperature": [229, 229],
+  "nozzle_temperature_initial_layer": [229, 229],
+  "bed_temperature": [55, 55],
+  "bed_temperature_initial_layer": [55, 55],
+
+  "filament_max_volumetric_speed": 1.42,
+  "filament_flow_ratio": 1.02,
+
+  "retraction_length": [0.32],
+  "retraction_speed": [11],
+  "deretraction_speed": [11],
+  "wipe_distance": 0.75,
+
+  "fan_min_speed": [10],
+  "fan_max_speed": [18],
+  "fan_cooling_layer_time": [10],
+  "slow_down_layer_time": [5],
+  "full_fan_speed_layer": [3],
+
+  "outer_wall_speed": 23,
+  "inner_wall_speed": 30,
+  "layer_height": 0.20,
+  "line_width": 0.48,
+
+  "avoid_crossing_perimeters": true,
+  "avoid_crossing_perimeters_max_detour": 8,
+  "avoid_crossing_perimeters_type": "contour",
+
+  "acceleration": 650,
+
+  "leviers": {
+    "note": "Hiérarchie des leviers issue du REX — NE PAS modifier sans nouveau DOE",
+    "1_qualite_matiere": "Séchage 45°C/10h — levier structurant dominant",
+    "2_temperature_buse": "229°C — point précis ±2°C = sortie de régime",
+    "3_debit_volumique": "1.42 mm³/s — limite haute matière vieillie",
+    "4_ventilation": "10–18% — solidification contrôlée",
+    "5_wipe": "0.75mm — levier clé anti-blobs",
+    "6_retraction": "0.32mm — levier faible sur TPU",
+    "7_avoid_crossing": "ON / 8mm — levier slicer dominant -60% stringing"
+  },
+
+  "rex_ref": "rex/REX_TPU85A_NinjaFlex_BambuA1_0.4mm_229C_v2.html",
+  "validated": true,
+  "validation_date": "2026-03-20",
+  "machine": "Bambu Lab A1",
+  "nozzle_diameter": 0.4,
+  "shore": "85A",
+  "grade": "proto_rd"
+}
