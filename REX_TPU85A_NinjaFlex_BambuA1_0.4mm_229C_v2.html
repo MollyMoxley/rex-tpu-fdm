@@ -193,3 +193,22 @@ body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13p
 </div>
 </body>
   </html>
+git clone https://github.com/MollyMoxley/rex-tpu-fdm.git
+cd rex-tpu-fdm
+# copier le fichier v3 dans ce dossier, puis les 3 commandes ci-dessus
+```
+
+---
+
+**Une observation sur la convention de nommage** — à considérer pour les prochaines itérations.
+
+Ton nom de fichier `REX_TPU85A_NinjaFlex_BambuA1_0.4mm_229C_v3.html` encode la config process dans le nom, mais la v3 a changé de problématique (supports, pas extrusion). Le `229C` dans le nom ne dit plus rien du focus réel.
+
+Deux options propres pour la suite :
+```
+# Option A — versionning linéaire, garde la traçabilité
+REX_TPU85A_NinjaFlex_BambuA1_0.4mm_v3_supports.html
+
+# Option B — branche de problématique
+REX_TPU85A_BambuA1_supports_v1.html   ← nouveau cycle DOE
+REX_TPU85A_BambuA1_extrusion_v2.html  ← renommer le précédent
