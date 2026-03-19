@@ -1,0 +1,77 @@
+{
+  "type": "filament",
+  "filament_id": "TPU98A-BambuA1-0.4mm",
+  "filament_vendor": "Générique / à préciser",
+  "filament_type": "TPU",
+  "filament_colour": "#AAAAAA",
+  "filament_diameter": 1.75,
+  "filament_density": 1.22,
+  "filament_cost": 0,
+
+  "notes": "Profil TPU 98A — Bambu Lab A1 0.4mm. Paramètres extrapolés depuis REX TPU 85A validé (2026-03-20). Shore plus élevé = meilleure fluidité, T buse plus basse, débit plus stable. GRADE PRODUCTION recommandé. Séchage 45°C / 8h avant impression. Valider sur première impression et ajuster T buse ±3°C si nécessaire.",
+
+  "nozzle_temperature": [220, 222],
+  "nozzle_temperature_initial_layer": [222, 222],
+  "bed_temperature": [45, 45],
+  "bed_temperature_initial_layer": [50, 50],
+
+  "filament_max_volumetric_speed": 2.5,
+  "filament_flow_ratio": 1.00,
+
+  "retraction_length": [0.40],
+  "retraction_speed": [15],
+  "deretraction_speed": [12],
+  "wipe_distance": 0.60,
+
+  "fan_min_speed": [20],
+  "fan_max_speed": [35],
+  "fan_cooling_layer_time": [8],
+  "slow_down_layer_time": [4],
+  "full_fan_speed_layer": [2],
+
+  "outer_wall_speed": 30,
+  "inner_wall_speed": 40,
+  "layer_height": 0.20,
+  "line_width": 0.48,
+
+  "avoid_crossing_perimeters": true,
+  "avoid_crossing_perimeters_max_detour": 8,
+  "avoid_crossing_perimeters_type": "contour",
+
+  "acceleration": 800,
+
+  "delta_vs_tpu85a": {
+    "note": "Différences intentionnelles vs profil TPU 85A REX validé",
+    "nozzle_temperature": "220°C vs 229°C — shore 98A plus fluide à T plus basse",
+    "bed_temperature": "45°C vs 55°C — adhérence suffisante, moins de warping",
+    "filament_max_volumetric_speed": "2.5 vs 1.42 mm³/s — rhéologie plus stable",
+    "retraction_length": "0.40mm vs 0.32mm — rétraction légèrement plus agressive possible",
+    "retraction_speed": "15 vs 11 mm/s",
+    "wipe_distance": "0.60mm vs 0.75mm — moins de blobs attendus sur 98A",
+    "fan_min_speed": "20% vs 10% — solidification plus rapide acceptable",
+    "fan_max_speed": "35% vs 18%",
+    "outer_wall_speed": "30 vs 23 mm/s",
+    "inner_wall_speed": "40 vs 30 mm/s",
+    "acceleration": "800 vs 650 mm/s²"
+  },
+
+  "leviers": {
+    "note": "Hiérarchie extrapolée depuis REX 85A — à confirmer par DOE 98A",
+    "1_qualite_matiere": "Séchage 45°C/8h — levier dominant",
+    "2_temperature_buse": "220°C point de départ — ajuster ±3°C sur première impression",
+    "3_debit_volumique": "2.5 mm³/s — à valider, monter prudemment si sous-extrusion",
+    "4_ventilation": "20–35% — shore plus élevé tolère plus de refroidissement",
+    "5_wipe": "0.60mm — moins critique que 85A",
+    "6_retraction": "0.40mm — surveiller stringing vs compression hotend",
+    "7_avoid_crossing": "ON / 8mm — hérité 85A, conserver par défaut"
+  },
+
+  "rex_ref": "rex/REX_TPU85A_NinjaFlex_BambuA1_0.4mm_229C_v2.html",
+  "validated": false,
+  "validation_date": null,
+  "validation_note": "Extrapolé depuis REX TPU 85A — première impression obligatoire avant production",
+  "machine": "Bambu Lab A1",
+  "nozzle_diameter": 0.4,
+  "shore": "98A",
+  "grade": "production"
+}

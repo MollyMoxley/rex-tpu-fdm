@@ -1,0 +1,81 @@
+{
+  "type": "filament",
+  "filament_id": "TPU98A-QidiXMax3-0.4mm",
+  "filament_vendor": "Générique / à préciser",
+  "filament_type": "TPU",
+  "filament_colour": "#AAAAAA",
+  "filament_diameter": 1.75,
+  "filament_density": 1.22,
+  "filament_cost": 0,
+
+  "notes": "Profil TPU 98A — EX0 Qidi X-Max 3 — volume 310x310x315mm. Chambre fermée : ventilation réduite vs Bambu A1. Paramètres extrapolés depuis REX TPU 85A (Bambu A1) + delta chambre fermée. GRADE PRODUCTION recommandé. Séchage 45°C / 8h avant impression.",
+
+  "nozzle_temperature": [220, 222],
+  "nozzle_temperature_initial_layer": [222, 222],
+  "bed_temperature": [45, 45],
+  "bed_temperature_initial_layer": [50, 50],
+
+  "filament_max_volumetric_speed": 2.5,
+  "filament_flow_ratio": 1.00,
+
+  "retraction_length": [0.40],
+  "retraction_speed": [15],
+  "deretraction_speed": [12],
+  "wipe_distance": 0.60,
+
+  "fan_min_speed": [15],
+  "fan_max_speed": [25],
+  "fan_cooling_layer_time": [8],
+  "slow_down_layer_time": [4],
+  "full_fan_speed_layer": [2],
+
+  "outer_wall_speed": 30,
+  "inner_wall_speed": 40,
+  "layer_height": 0.20,
+  "line_width": 0.48,
+
+  "avoid_crossing_perimeters": true,
+  "avoid_crossing_perimeters_max_detour": 8,
+  "avoid_crossing_perimeters_type": "contour",
+
+  "acceleration": 800,
+
+  "start_gcode": "PRINT_START_TPU98A BED_TEMP=[bed_temperature_initial_layer_single] NOZZLE_TEMP=[nozzle_temperature_initial_layer]",
+  "end_gcode": "PRINT_END_TPU",
+
+  "machine_specifics": {
+    "build_volume": "310x310x315mm",
+    "chamber": "fermée",
+    "note_ventilation": "Fan 15-25% vs 20-35% Bambu A1 — chambre fermée accumule la chaleur ambiante",
+    "note_temperature": "220°C à confirmer sur thermistance X-Max 3 — possible delta ±3°C vs Bambu A1",
+    "note_purge": "Purge line bord gauche X=2 encodée dans macro PRINT_START_TPU98A"
+  },
+
+  "delta_vs_bambu_a1_98a": {
+    "fan_min_speed": "15% vs 20% — chambre fermée",
+    "fan_max_speed": "25% vs 35% — chambre fermée",
+    "start_gcode": "Appel macro Klipper — Bambu gère en interne"
+  },
+
+  "leviers": {
+    "note": "Hiérarchie extrapolée depuis REX 85A — à confirmer par DOE 98A",
+    "1_qualite_matiere": "Séchage 45°C/8h — levier dominant",
+    "2_temperature_buse": "220°C point de départ — ajuster ±3°C sur première impression",
+    "3_debit_volumique": "2.5 mm³/s — à valider",
+    "4_ventilation": "15–25% chambre fermée",
+    "5_wipe": "0.60mm",
+    "6_retraction": "0.40mm",
+    "7_avoid_crossing": "ON / 8mm"
+  },
+
+  "rex_ref": "rex/REX_TPU85A_NinjaFlex_BambuA1_0.4mm_229C_v2.html",
+  "macro_ref": "macros/klipper/tpu98a_start_ex0_xmax3.cfg",
+  "validated": false,
+  "validation_date": null,
+  "validation_note": "Extrapolé depuis REX TPU 85A + delta chambre fermée X-Max 3 — première impression obligatoire",
+  "machine": "Qidi X-Max 3",
+  "machine_id": "EX0",
+  "nozzle_diameter": 0.4,
+  "shore": "98A",
+  "grade": "production"
+}
