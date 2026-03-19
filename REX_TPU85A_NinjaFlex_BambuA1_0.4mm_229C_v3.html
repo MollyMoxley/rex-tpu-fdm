@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>REX TPU85A NinjaFlex BambuA1 0.4mm 229C v3 — DOE Supports</title>
+<style>
+:root{--ink:#0D1117;--ink-soft:#3A4453;--ink-ghost:#6B7684;--rule:#E2E6EB;--rule-mid:#C8CDD4;--bg:#F7F9FB;--bg-card:#FFFFFF;--accent:#0057FF;--accent-lt:#E8EFFF;--green:#006644;--green-lt:#E3F5EC;--red:#B91C1C;--red-lt:#FEF2F2;--warn:#D97706;--warn-lt:#FEF3C7;--purple:#6D28D9;--purple-lt:#EDE9FE;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);font-size:13px;line-height:1.5;}
+.page{max-width:960px;margin:0 auto;padding:48px 40px 80px;}
+
+/* MASTHEAD */
+.masthead{border-bottom:2px solid var(--ink);padding-bottom:20px;margin-bottom:36px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;}
+.masthead-label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-ghost);margin-bottom:6px;}
+.masthead-title{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1;}
+.masthead-subtitle{font-size:13px;color:var(--ink-soft);margin-top:4px;font-weight:300;font-style:italic;}
+.masthead-meta{text-align:right;}
+.meta-pill{display:inline-block;background:var(--accent);color:#fff;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.1em;padding:3px 9px;border-radius:2px;margin-bottom:8px;}
+.meta-date{font-family:var(--mono);font-size:11px;color:var(--ink-ghost);display:block;}
+.version-delta{display:inline-block;background:var(--purple-lt);color:var(--purple);font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;padding:2px 8px;border-radius:2px;margin-left:8px;}
+
+/* SECTION */
+.section{margin-bottom:40px;}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.section-number{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--accent);letter-spacing:.08em;min-width:28px;}
+.section-title{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+.section-rule{flex:1;height:1px;background:var(--rule);}
+.section-badge{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.08em;padding:2px 7px;border-radius:2px;}
+.section-badge-new{background:var(--purple-lt);color:var(--purple);}
+.section-badge-locked{background:var(--green-lt);color:var(--green);}
+
+/* CONTEXT */
+.context-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+.ctx-cell{background:var(--bg-card);padding:12px 14px;}
+.ctx-label{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);letter-spacing:.06em;margin-bottom:3px;}
+.ctx-value{font-size:13px;font-weight:500;color:var(--ink);}
+
+/* DELTA BANNER */
+.delta-banner{background:var(--purple-lt);border:1px solid #C4B5FD;border-radius:4px;padding:14px 18px;margin-bottom:32px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;}
+.delta-icon{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--purple);line-height:1;}
+.delta-title{font-size:12px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:.04em;}
+.delta-body{font-size:11px;color:var(--ink-soft);line-height:1.6;}
+
+/* PARAM TABLE */
+.param-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:4px;overflow:hidden;}
+.param-table thead tr{background:var(--ink);}
+.param-table thead th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:10px 14px;text-align:left;}
+.param-table tbody tr{border-top:1px solid var(--rule);}
+.param-table tbody tr:nth-child(even){background:var(--bg);}
+.param-table tbody tr:nth-child(odd){background:var(--bg-card);}
+.param-table tbody tr.row-new{background:#F5F3FF;}
+.param-table tbody tr.row-new:nth-child(even){background:#EDE9FE;}
+.param-table td{padding:10px 14px;vertical-align:top;}
+.param-label{font-size:12px;font-weight:500;color:var(--ink);}
+.param-value{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);}
+.param-value.critical{color:var(--red);font-size:13px;}
+.param-value.new{color:var(--purple);}
+.param-unit{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);}
+.param-note{font-size:11px;color:var(--ink-soft);line-height:1.4;}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:2px;white-space:nowrap;}
+.badge-ok{background:var(--green-lt);color:var(--green);}
+.badge-fill{background:var(--accent);color:#fff;}
+.badge-new{background:var(--purple-lt);color:var(--purple);}
+.badge-open{background:var(--warn-lt);color:var(--warn);}
+.badge-locked{background:var(--ink);color:#fff;}
+
+/* MÉCANIQUE DE RUPTURE */
+.mecanique-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.meca-card{border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--bg-card);}
+.meca-card.wrong{border-color:#FECACA;}
+.meca-card.right{border-color:#6EE7B7;}
+.meca-header{padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--rule);}
+.meca-card.wrong .meca-header{background:var(--red-lt);}
+.meca-card.right .meca-header{background:var(--green-lt);}
+.meca-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;}
+.meca-card.wrong .meca-tag{color:var(--red);}
+.meca-card.right .meca-tag{color:var(--green);}
+.meca-title{font-size:12px;font-weight:600;color:var(--ink);}
+.meca-body{padding:12px 14px;font-size:11px;color:var(--ink-soft);line-height:1.6;}
+.meca-body code{font-family:var(--mono);font-size:10px;background:var(--bg);padding:1px 4px;border-radius:2px;color:var(--accent);}
+
+/* DOE VARIABLES TABLE */
+.doe-table{width:100%;border-collapse:collapse;border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:16px;}
+.doe-table thead tr{background:var(--ink);}
+.doe-table thead th{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);padding:10px 14px;text-align:left;}
+.doe-table tbody tr{border-top:1px solid var(--rule);}
+.doe-table tbody tr.locked{background:#F0FDF4;}
+.doe-table tbody tr.open{background:#FFFBEB;}
+.doe-table tbody tr.next{background:#F5F3FF;}
+.doe-table td{padding:10px 14px;vertical-align:middle;font-size:12px;}
+.doe-param{font-weight:600;color:var(--ink);}
+.doe-val{font-family:var(--mono);font-size:12px;font-weight:700;}
+.doe-val.locked{color:var(--green);}
+.doe-val.open{color:var(--warn);}
+.doe-val.next{color:var(--purple);}
+.doe-effect{font-size:11px;color:var(--ink-soft);font-style:italic;}
+
+/* TOPOLOGIE */
+.topo-insight{background:var(--ink);border-radius:4px;padding:20px 24px;color:#fff;margin-bottom:16px;}
+.topo-headline{font-size:15px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em;}
+.topo-sub{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;}
+.topo-sub strong{color:#fff;}
+
+/* ITÉRATION */
+.iter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.iter-card{border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--bg-card);}
+.iter-header{padding:10px 14px;border-bottom:1px solid var(--rule);background:var(--bg);}
+.iter-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink-ghost);letter-spacing:.08em;}
+.iter-value{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--accent);margin-top:2px;}
+.iter-body{padding:12px 14px;font-size:11px;color:var(--ink-soft);line-height:1.55;}
+
+/* AXES FUTURS */
+.axes-list{display:flex;flex-direction:column;gap:6px;}
+.axe-row{display:grid;grid-template-columns:32px 1fr auto;gap:12px;align-items:start;padding:12px 16px;border-radius:4px;background:var(--bg-card);border:1px solid var(--rule);}
+.axe-num{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--rule-mid);line-height:1.2;}
+.axe-row.priority .axe-num{color:var(--accent);}
+.axe-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:3px;}
+.axe-desc{font-size:11px;color:var(--ink-soft);line-height:1.4;}
+.axe-horizon{font-family:var(--mono);font-size:10px;color:var(--ink-ghost);white-space:nowrap;padding-top:2px;}
+
+/* HÉRITAGE v2 */
+.heritage-callout{border-left:3px solid var(--green);background:var(--green-lt);border-radius:0 4px 4px 0;padding:14px 18px;margin-bottom:24px;}
+.heritage-title{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;}
+.heritage-body{font-size:12px;color:var(--ink-soft);line-height:1.6;}
+.heritage-body code{font-family:var(--mono);font-size:11px;background:rgba(0,102,68,.08);padding:1px 5px;border-radius:2px;color:var(--green);font-weight:600;}
+
+/* STATUS FOOTER */
+.status-footer{margin-top:40px;padding:18px 24px;background:var(--ink);border-radius:4px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;}
+.status-item{padding:0 16px;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+.status-item:last-child{border-right:none;}
+.status-item-label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px;}
+.status-item-value{font-family:var(--mono);font-size:11px;font-weight:600;color:#fff;}
+.status-item-value.ok{color:#4ADE80;}
+.status-item-value.warn{color:#FCD34D;}
+.status-item-value.new{color:#C4B5FD;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div>
+      <div class="masthead-label">REX — TPU85A NinjaFlex · BambuA1 · 0.4mm · 229C</div>
+      <div class="masthead-title">DOE — Optimisation Supports TPU 85A<span class="version-delta">v3 ↑ supports</span></div>
+      <div class="masthead-subtitle">Mécanique de rupture supports · Géométrie pièce · Bambu A1 · Buse 0.4mm · Grade 85A</div>
+    </div>
+    <div class="masthead-meta">
+      <div class="meta-pill">REX v3.0</div>
+      <span class="meta-date">19 / 03 / 2026</span>
+    </div>
+  </div>
+
+  <!-- DELTA v2 → v3 -->
+  <div class="delta-banner">
+    <div class="delta-icon">Δ</div>
+    <div>
+      <div class="delta-title">Changement de problématique — v2 → v3</div>
+      <div class="delta-body">
+        <strong>v2 :</strong> Stabilisation extrusion sur matière vieillie 85A (stringing, oozing, rhéologie dégradée).<br>
+        <strong>v3 :</strong> Optimisation supports pour <strong>géométrie pièce complexe en TPU 85A grade neuf</strong> — objectif : supports cassants, détachement sans déformation pièce.<br>
+        Les paramètres process (temp, flow, vitesses) hérités de v2 sont <strong>verrouillés</strong> et ne sont pas reroulés.
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 CONTEXTE -->
+  <div class="section">
+    <div class="section-header"><span class="section-number">01</span><span class="section-title">Contexte</span><div class="section-rule"></div></div>
+    <div class="context-grid">
+      <div class="ctx-cell"><div class="ctx-label">Machine</div><div class="ctx-value">Bambu Lab A1</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Filament</div><div class="ctx-value">TPU 85A NinjaFlex</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Buse</div><div class="ctx-value">0.4 mm</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Shore A</div><div class="ctx-value">85A</div></div>
+      <div class="ctx-cell"><div class="ctx-label">État matière</div><div class="ctx-value" style="color:var(--green);font-weight:600;">Grade neuf</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Cas d'usage</div><div class="ctx-value">Supports sur géométrie pièce</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Problème initial</div><div class="ctx-value">Supports non cassants</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Symptôme dominant</div><div class="ctx-value">Effet "chewing-gum" au retrait</div></div>
+      <div class="ctx-cell"><div class="ctx-label">Objectif v3</div><div class="ctx-value" style="color:var(--accent);font-weight:700;">Rupture localisée · 0 déformation</div></div>
+    </div>
+  </div>
+
+  <!-- 02 HÉRITAGE v2 — PARAMÈTRES VERROUILLÉS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">Héritage v2 — Paramètres process verrouillés</span>
+      <div class="section-rule"></div>
+      <span class="section-badge section-badge-locked">🔒 FROZEN</span>
+    </div>
+    <div class="heritage-callout">
+      <div class="heritage-title">Invariants process — ne pas retoucher</div>
+      <div class="heritage-body">
+        Ces paramètres ont été validés en v2 et s'appliquent directement en v3. Tout re-test de ces variables introduit une variable confondante dans le DOE supports.
+      </div>
+    </div>
+    <table class="param-table">
+      <thead><tr><th>Paramètre</th><th>Valeur</th><th>Unité</th><th>Statut</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td><span class="param-label">Temp. buse</span></td><td><span class="param-value">229</span></td><td><span class="param-unit">°C</span></td><td><span class="badge badge-locked">FROZEN</span></td><td><span class="param-note">Point critique — ±2°C = sortie de régime</span></td></tr>
+        <tr><td><span class="param-label">Temp. plateau</span></td><td><span class="param-value">55</span></td><td><span class="param-unit">°C</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Flow</span></td><td><span class="param-value">1.02</span></td><td><span class="param-unit">—</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Débit volumique max</span></td><td><span class="param-value">1.42</span></td><td><span class="param-unit">mm³/s</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Rétractation</span></td><td><span class="param-value">0.32 · 11</span></td><td><span class="param-unit">mm · mm/s</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Wipe</span></td><td><span class="param-value">0.75</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Ventilation</span></td><td><span class="param-value">10–18</span></td><td><span class="param-unit">%</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Accélération</span></td><td><span class="param-value">650</span></td><td><span class="param-unit">mm/s²</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Vitesse mur ext / int</span></td><td><span class="param-value">23 · 30</span></td><td><span class="param-unit">mm/s</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Hauteur couche · Largeur ligne</span></td><td><span class="param-value">0.20 · 0.48</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-locked">FROZEN</span></td><td></td></tr>
+        <tr><td><span class="param-label">Avoid crossing perimeters</span></td><td><span class="param-value">ON · 8 mm</span></td><td><span class="param-unit">—</span></td><td><span class="badge badge-fill">CLE</span></td><td><span class="param-note">Levier trajectoire — actif sur supports aussi</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 03 MODÈLE MÉCANIQUE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">Modèle — Mécanique de rupture supports TPU</span>
+      <div class="section-rule"></div>
+      <span class="section-badge section-badge-new">NOUVEAU v3</span>
+    </div>
+    <div class="topo-insight">
+      <div class="topo-headline">En TPU, le support optimal est un problème de mécanique de rupture — pas de qualité de surface.</div>
+      <div class="topo-sub">Objectif : <strong>minimiser la cohésion structurelle</strong>, pas maximiser la précision.<br>
+      Le bon modèle : support <strong>fragile localisé</strong> → rupture propre au démontage → 0 déformation pièce élastique.</div>
+    </div>
+    <div class="mecanique-grid">
+      <div class="meca-card wrong">
+        <div class="meca-header"><span class="meca-tag">❌ MODÈLE PLA</span><span class="meca-title">Support cohésif</span></div>
+        <div class="meca-body">Parois + interface + gap faible → structure rigide et continue.<br>Avec TPU : le support <strong>s'étire</strong> au lieu de casser (<code>effet chewing-gum</code>). Déformation pièce systématique.</div>
+      </div>
+      <div class="meca-card right">
+        <div class="meca-header"><span class="meca-tag">✅ MODÈLE TPU</span><span class="meca-title">Support fragilisé</span></div>
+        <div class="meca-body">0 parois + 0 interface + gap Z/XY augmenté → structure discontinue.<br>Comportement <strong>fragile localisé</strong> : la rupture se concentre sur la section minimale. Détachement net.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 PARAMÈTRES SUPPORTS — VALEURS VERROUILLÉES v3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">Paramètres supports — Valeurs verrouillées v3</span>
+      <div class="section-rule"></div>
+      <span class="section-badge section-badge-new">NOUVEAU v3</span>
+    </div>
+    <table class="param-table">
+      <thead><tr><th>Paramètre support</th><th>Valeur</th><th>Unité</th><th>Statut</th><th>Mécanisme</th></tr></thead>
+      <tbody>
+        <tr class="row-new"><td><span class="param-label">Couches interface supérieures</span></td><td><span class="param-value new critical">0</span></td><td><span class="param-unit">couches</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ adhérence support/pièce · ↑ séparation mécanique</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Couches interface inférieures</span></td><td><span class="param-value new critical">0</span></td><td><span class="param-unit">couches</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ adhérence support/pièce · ↑ séparation mécanique</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Distance Z supérieure</span></td><td><span class="param-value new">0.7</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ fusion verticale · ↑ facilité de détachement</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Distance Z inférieure</span></td><td><span class="param-value new">0.7</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ fusion verticale · symétrie mécanique</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Distance support/objet XY</span></td><td><span class="param-value new">0.8</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ collage latéral · ↑ tolérance mécanique</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Parois des supports</span></td><td><span class="param-value new critical">0</span></td><td><span class="param-unit">parois</span></td><td><span class="badge badge-fill">CRITIQUE</span></td><td><span class="param-note">↓ rigidité structurelle → passage élastique → fragile. Levier le plus impactant identifié.</span></td></tr>
+        <tr class="row-new"><td><span class="param-label">Angle seuil de support</span></td><td><span class="param-value new">45</span></td><td><span class="param-unit">°</span></td><td><span class="badge badge-new">VERROUILLÉ</span></td><td><span class="param-note">↓ volume de supports générés · réduction zones critiques</span></td></tr>
+        <tr><td><span class="param-label">Espacement motif (baseline)</span></td><td><span class="param-value" style="color:var(--warn);">3.25</span></td><td><span class="param-unit">mm</span></td><td><span class="badge badge-open">OUVERT</span></td><td><span class="param-note">Baseline actuelle — prochaine itération : 3.8 / 4.2 mm</span></td></tr>
+        <tr><td><span class="param-label">Motif support</span></td><td><span class="param-value" style="color:var(--warn);">Lignes</span></td><td><span class="param-unit">—</span></td><td><span class="badge badge-open">OUVERT</span></td><td><span class="param-note">Baseline — tester zigzag en itération suivante</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 05 DOE — VARIABLES & STATUTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <span class="section-title">DOE — Carte des variables et statuts</span>
+      <div class="section-rule"></div>
+    </div>
+    <table class="doe-table">
+      <thead><tr><th>Variable</th><th>Valeur actuelle</th><th>Plage testée</th><th>Statut</th><th>Effet identifié</th></tr></thead>
+      <tbody>
+        <tr class="locked"><td class="doe-param">Parois supports</td><td><span class="doe-val locked">0</span></td><td>0 vs 1–2</td><td><span class="badge badge-fill">🔒 VERROUILLÉ</span></td><td class="doe-effect">Levier #1 — passage comportement élastique → fragile</td></tr>
+        <tr class="locked"><td class="doe-param">Interface sup/inf</td><td><span class="doe-val locked">0 / 0</span></td><td>0 vs 2–4</td><td><span class="badge badge-locked">🔒 VERROUILLÉ</span></td><td class="doe-effect">↓ adhérence directe support/pièce</td></tr>
+        <tr class="locked"><td class="doe-param">Distance Z (sup + inf)</td><td><span class="doe-val locked">0.7 mm</span></td><td>0.2 → 0.7</td><td><span class="badge badge-locked">🔒 VERROUILLÉ</span></td><td class="doe-effect">↓ fusion verticale — seuil 0.7 = zone sans fusion</td></tr>
+        <tr class="locked"><td class="doe-param">Distance XY</td><td><span class="doe-val locked">0.8 mm</span></td><td>0.3 → 0.8</td><td><span class="badge badge-locked">🔒 VERROUILLÉ</span></td><td class="doe-effect">↓ collage latéral · tolérance mécanique</td></tr>
+        <tr class="locked"><td class="doe-param">Angle seuil</td><td><span class="doe-val locked">45°</span></td><td>35° → 55°</td><td><span class="badge badge-locked">🔒 VERROUILLÉ</span></td><td class="doe-effect">Réduction volume support — moins de zones critiques</td></tr>
+        <tr class="open"><td class="doe-param">Espacement motif</td><td><span class="doe-val open">3.25 mm</span></td><td>3.25 / 3.8 / 4.2</td><td><span class="badge badge-open">⏳ OUVERT</span></td><td class="doe-effect">↓ masse support ↓ continuité structurelle ↑ cassabilité</td></tr>
+        <tr class="open"><td class="doe-param">Motif support</td><td><span class="doe-val open">Lignes</span></td><td>Lignes / Zigzag</td><td><span class="badge badge-open">⏳ OUVERT</span></td><td class="doe-effect">Rupture en zigzag = alternée — à comparer lignes</td></tr>
+        <tr class="next"><td class="doe-param">Support painting</td><td><span class="doe-val next">Non actif</span></td><td>Zones critiques only</td><td><span class="badge badge-new">🔮 FUTUR</span></td><td class="doe-effect">Suppression supports non-nécessaires par peinture manuelle</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 06 PROCHAINE ITÉRATION -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <span class="section-title">Prochaine itération recommandée</span>
+      <div class="section-rule"></div>
+      <span class="section-badge section-badge-new">À TESTER</span>
+    </div>
+    <div class="iter-grid">
+      <div class="iter-card">
+        <div class="iter-header"><div class="iter-label">Variable 1</div><div class="iter-value">Espacement</div></div>
+        <div class="iter-body">Tester 3 niveaux :<br><strong>3.25 mm</strong> (baseline actuelle)<br><strong>3.8 mm</strong> (intermédiaire)<br><strong>4.2 mm</strong> (max fragmentation)<br><br>Mesure : force de retrait subjectif + qualité underside</div>
+      </div>
+      <div class="iter-card">
+        <div class="iter-header"><div class="iter-label">Variable 2</div><div class="iter-value">Motif</div></div>
+        <div class="iter-body">Comparer :<br><strong>Lignes</strong> (baseline — rupture unidirectionnelle)<br><strong>Zigzag</strong> (rupture alternée — fragmentation potentiellement meilleure)<br><br>Conseil : tester en combinaison avec espacement 3.8</div>
+      </div>
+      <div class="iter-card">
+        <div class="iter-header"><div class="iter-label">Mesures</div><div class="iter-value">Critères</div></div>
+        <div class="iter-body">1. <strong>Force de retrait</strong> — subjectif + chrono (en secondes)<br>2. <strong>Qualité surface underside</strong> — 1 (mauvaise) à 5 (propre)<br>3. <strong>Intégrité pièce</strong> — déformation visible oui/non<br><br>3 pièces identiques par combinaison → moyenne</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 AXES FUTURS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <span class="section-title">Axes futurs — Feuille de route supports TPU</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="axes-list">
+      <div class="axe-row priority"><span class="axe-num">1</span><div><div class="axe-title">Clôture DOE espacement + motif</div><div class="axe-desc">Verrouiller espacement optimal et motif → variables supports 100% gelées</div></div><span class="axe-horizon">COURT · 1–2 prints</span></div>
+      <div class="axe-row"><span class="axe-num">2</span><div><div class="axe-title">Support painting — zones critiques uniquement</div><div class="axe-desc">Utiliser la peinture de supports Bambu Studio pour cibler les surplombs critiques uniquement. Supprime les supports inutiles et réduit le volume total.</div></div><span class="axe-horizon">MOYEN · après clôture DOE</span></div>
+      <div class="axe-row"><span class="axe-num">3</span><div><div class="axe-title">Design orienté "supportless"</div><div class="axe-desc">Remanier les géométries amont pour supprimer les surplombs &gt;45° par chanfreins, orientation pièce ou splitting. Meilleur ROI long-terme.</div></div><span class="axe-horizon">LONG · si pièce fixée</span></div>
+      <div class="axe-row"><span class="axe-num">4</span><div><div class="axe-title">Optimisation géométrie pièce</div><div class="axe-desc">Co-design support/pièce : ajouter des points d'ancrage supports calibrés → rupture programmée à l'emplacement choisi.</div></div><span class="axe-horizon">LONG · niveau avancé</span></div>
+    </div>
+  </div>
+
+  <!-- STATUS FOOTER -->
+  <div class="status-footer">
+    <div class="status-item"><div class="status-item-label">REX</div><div class="status-item-value ok">EXPLOITABLE</div></div>
+    <div class="status-item"><div class="status-item-label">Process v2</div><div class="status-item-value ok">FROZEN · 11 params</div></div>
+    <div class="status-item"><div class="status-item-label">Supports v3</div><div class="status-item-value new">5 VERROUILLÉS · 2 OUVERTS</div></div>
+    <div class="status-item"><div class="status-item-label">Prochaine action</div><div class="status-item-value warn">DOE espacement + motif</div></div>
+  </div>
+
+</div>
+</body>
+</html>
