@@ -1,4 +1,4 @@
-{
+﻿{
   "type": "filament",
   "filament_id": "TPU98A-BambuA1-0.4mm",
   "filament_vendor": "Générique / à préciser",
@@ -10,8 +10,8 @@
 
   "notes": "Profil TPU 98A — Bambu Lab A1 0.4mm. Paramètres extrapolés depuis REX TPU 85A validé (2026-03-20). Shore plus élevé = meilleure fluidité, T buse plus basse, débit plus stable. GRADE PRODUCTION recommandé. Séchage 45°C / 8h avant impression. Valider sur première impression et ajuster T buse ±3°C si nécessaire.",
 
-  "nozzle_temperature": [220, 222],
-  "nozzle_temperature_initial_layer": [222, 222],
+  "nozzle_temperature": [228, 228],
+  "nozzle_temperature_initial_layer": [228, 228],
   "bed_temperature": [45, 45],
   "bed_temperature_initial_layer": [50, 50],
 
@@ -58,7 +58,7 @@
   "leviers": {
     "note": "Hiérarchie extrapolée depuis REX 85A — à confirmer par DOE 98A",
     "1_qualite_matiere": "Séchage 45°C/8h — levier dominant",
-    "2_temperature_buse": "220°C point de départ — ajuster ±3°C sur première impression",
+    "2_temperature_buse": "228°C validé terrain DOE 2026-03-27 — ajuster ±3°C sur première impression",
     "3_debit_volumique": "2.5 mm³/s — à valider, monter prudemment si sous-extrusion",
     "4_ventilation": "20–35% — shore plus élevé tolère plus de refroidissement",
     "5_wipe": "0.60mm — moins critique que 85A",
